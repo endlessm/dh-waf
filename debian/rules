@@ -2,21 +2,3 @@
 
 %:
 	dh $@
-
-clean:
-	make clean
-	dh_clean
-
-override_dh_auto_test:
-	#make tests
-	# FIXME: enable above line once python3 doesn't depend on dh-python anymore
-	# (i.e. there are no circular dependencies)
-
-override_dh_auto_install:
-	DESTDIR=debian/dh-python PREFIX=/usr make install manpages
-	# disable dh_python2 for now (shipped in python-defaults)
-	rm debian/dh-python/usr/share/debhelper/autoscripts/postinst-pycompile
-	rm debian/dh-python/usr/share/debhelper/autoscripts/prerm-pyclean
-	rm debian/dh-python/usr/share/perl5/Debian/Debhelper/Sequence/python2.pm
-	# generate maintainer scripts, etc.
-	./dh_python3

@@ -1,36 +1,19 @@
-Source: dh-python
-Section: python
+Source: dh-waf
+Section: waf
 Priority: optional
-Maintainer: Piotr Ożarowski <piotr@debian.org>
-Uploaders: Stefano Rivera <stefanor@debian.org>, Barry Warsaw <barry@debian.org>
-Build-Depends: debhelper (>= 9), python3-minimal, libpython3-stdlib, libdpkg-perl,
-# provides rst2man command (python3-docutils not used to avoid circular deps):
- python-docutils,
-# used by tests: (disabled to avoid circular deps with python3)
-# python3-nose,
-# python3-all, python3-all-dbg, python3-all-dev,
-# python-all, python-all-dbg, python-all-dev
+Maintainer: Niv Sardi <xaiki@debian.org>
+Build-Depends: debhelper (>= 9), libdpkg-perl,
 Standards-Version: 3.9.8
-Vcs-Git: https://anonscm.debian.org/git/dh-python/dh-python.git
-Vcs-Browser: https://anonscm.debian.org/cgit/dh-python/dh-python.git
-X-Python3-Version: >= 3.2
+Vcs-Git: https://github.com/endlessm/dh-waf.git
+Vcs-Browser: https://github.com/endlessm/dh-waf.git
+X-Waf3-Version: >= 3.2
 
-Package: dh-python
+Package: dh-waf
 Architecture: all
 Multi-Arch: foreign
-Depends: ${misc:Depends}, ${python3:Depends}
+Depends: ${misc:Depends}
 Suggests: libdpkg-perl
-Breaks:
-# due to /usr/bin/dh_python3 and debhelper files
- python3 (<< 3.3.2-4~)
-Replaces: python3 (<< 3.3.2-4~)
-Description: Debian helper tools for packaging Python libraries and applications
+Description: Debian helper tools for packaging waf-enabled packages
  This package contains:
-  * pybuild - invokes various build systems for requested Python versions in
-    order to build modules and extensions
-  * dh_python2 - calculates Python 2.X dependencies for Debian packages,
-    adds maintainer scripts to byte compile files, etc.
-  * dh_python3 - calculates Python 3.X dependencies for Debian packages,
-    adds maintainer scripts to byte compile files, etc.
-  * dh_pypy - calculates PyPy dependencies for Debian packages,
-    adds maintainer scripts to byte compile files, etc.
+  * dh_waf - invokes various build systems for requested Waf versions in
+    order to build

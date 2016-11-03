@@ -54,7 +54,8 @@ sub install {
 
 sub test {
 	my $this=shift;
-	return $this->waf_doit('test');
+	return print "WAF does not support test yet"
+#	return $this->waf_doit('test');
 }
 
 sub clean {

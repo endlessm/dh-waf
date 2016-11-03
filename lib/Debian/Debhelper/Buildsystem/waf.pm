@@ -30,30 +30,36 @@ sub new {
 	return $this;
 }
 
+sub waf_doit {
+	my $this = shift @_;
+	my $cmd = shift @_;
+	return doit('./waf', $cmd,  @_);
+}
+
 sub configure {
 	my $this=shift;
-	return doit('./waf', 'configure', $ENV{'DEB_CONFIGURE_OPTIONS'});
+	return $this->waf_doit('configure', '--prefix=/usr');
 }
 
 sub build {
 	my $this=shift;
-	return doit('./waf', 'build');
+	return $this->waf_doit('build');
 }
 
 sub install {
 	my $this=shift;
 	my $destdir=shift;
-	return doit('./waf', 'install', '--destdir='.$destdir)
+	return $this->waf_doit('install', '--destdir='.$destdir)
 }
 
 sub test {
 	my $this=shift;
-	return doit('./waf', 'test');
+	return $this->waf_doit('test');
 }
 
 sub clean {
 	my $this=shift;
-	doit('./waf', 'clean');
+	$this->waf_doit('clean');
 	doit('rm', '-rf', 'build/*', 'build/.conf*', 'build/.waf*');
 	doit('find', '.', '-name', '*.pyc', '-exec', 'rm', '{}', ';');
 }

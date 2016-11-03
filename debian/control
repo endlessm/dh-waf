@@ -2,7 +2,7 @@ Source: dh-waf
 Section: waf
 Priority: optional
 Maintainer: Niv Sardi <xaiki@debian.org>
-Build-Depends: debhelper (>= 9), libdpkg-perl,
+Build-Depends: debhelper (>= 9), libdpkg-perl, libmodule-install-perl
 Standards-Version: 3.9.8
 Vcs-Git: https://github.com/endlessm/dh-waf.git
 Vcs-Browser: https://github.com/endlessm/dh-waf.git

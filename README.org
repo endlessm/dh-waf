@@ -6,5 +6,5 @@ it by adding =--with waf= to your dh lines:
 #!/usr/bin/make -f
 
 %:
-	dh $@ --with=waf
+	dh $@ --buildsystem=waf
 #+END_SRC

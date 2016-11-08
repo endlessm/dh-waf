@@ -10,7 +10,7 @@ package Debian::Debhelper::Buildsystem::waf;
 use strict;
 use Dpkg::Control;
 use Dpkg::Changelog::Debian;
-use Debian::Debhelper::Dh_Lib qw(error doit);
+use Debian::Debhelper::Dh_Lib qw(error doit doit_noerror);
 use base 'Debian::Debhelper::Buildsystem';
 
 sub DESCRIPTION {
@@ -19,7 +19,7 @@ sub DESCRIPTION {
 
 sub check_auto_buildable {
 	my $this=shift;
-	return doit('./waf', '--help');
+	return doit_noerror('./waf', '--help');
 }
 
 sub new {

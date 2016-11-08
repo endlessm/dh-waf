@@ -1,7 +1,7 @@
 #+TITLE: dh-waf: a debhelper helper to help with waf
 
 this is a simple debhelper module to help package waf enabled projects, use
-it by adding =--with waf= to your dh lines:
+it by adding =--buildsystem=waf= to your dh lines:
 #+BEGIN_SRC make
 #!/usr/bin/make -f
 

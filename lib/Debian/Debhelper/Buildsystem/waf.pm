@@ -33,7 +33,7 @@ sub new {
 sub waf_doit {
 	my $this = shift @_;
 	my $cmd = shift @_;
-	return doit('./waf', $cmd,  @_);
+	return $this->doit_in_builddir('./waf', $cmd,  @_);
 }
 
 sub configure {

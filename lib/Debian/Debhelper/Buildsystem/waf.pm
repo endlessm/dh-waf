@@ -1,6 +1,7 @@
-# A debhelper build system class for building Python libraries
+# A debhelper build system class for building waf packages
 #
-# Copyright: © 2012-2013 Piotr Ożarowski
+# Copied from dh-python:  © 2012-2013 Piotr Ożarowski
+# Copyright: © 2016 Niv Sardi <xaiki@endlessm.com>
 
 # TODO:
 # * support for dh --parallel
@@ -10,7 +11,7 @@ package Debian::Debhelper::Buildsystem::waf;
 use strict;
 use Dpkg::Control;
 use Dpkg::Changelog::Debian;
-use Debian::Debhelper::Dh_Lib qw(error doit doit_noerror);
+use Debian::Debhelper::Dh_Lib qw(error doit doit_noerror verbose_print);
 use base 'Debian::Debhelper::Buildsystem';
 
 sub DESCRIPTION {
@@ -54,7 +55,7 @@ sub install {
 
 sub test {
 	my $this=shift;
-	return print "WAF does not support test yet"
+	return verbose_print "WAF does not support test yet"
 #	return $this->waf_doit('test');
 }
 

@@ -11,7 +11,7 @@ package Debian::Debhelper::Buildsystem::waf;
 use strict;
 use Dpkg::Control;
 use Dpkg::Changelog::Debian;
-use Debian::Debhelper::Dh_Lib qw(error doit doit_noerror verbose_print compat get_buildprefix dpkg_architecture_value);
+use Debian::Debhelper::Dh_Lib qw(error doit doit_noerror verbose_print compat dpkg_architecture_value);
 use base 'Debian::Debhelper::Buildsystem';
 
 sub DESCRIPTION {
@@ -42,37 +42,37 @@ sub configure {
 
 # Standard set of options for configure.
 	my @opts;
-	my $prefix=get_buildprefix();
+	my $prefix=$ENV{'prefix'} || '/usr';
 
 	push @opts, "--prefix=$prefix";
-	push @opts, "--includedir=\${prefix}/include";
-	push @opts, "--mandir=\${prefix}/share/man";
-	push @opts, "--infodir=\${prefix}/share/info";
+	push @opts, "--includedir=$prefix/include";
+	push @opts, "--mandir=$prefix/share/man";
+	push @opts, "--infodir=$prefix/share/info";
 
 	if ($prefix eq "/usr") {
 		push @opts, "--sysconfdir=/etc";
 		push @opts, "--localstatedir=/var";
 	} else {
-		push @opts, "--sysconfdir=\${prefix}/etc";
-		push @opts, "--localstatedir=\${prefix}/var";
+		push @opts, "--sysconfdir=$prefix/etc";
+		push @opts, "--localstatedir=$prefix/var";
 	}
 
 	my $multiarch=dpkg_architecture_value("DEB_HOST_MULTIARCH");
 
 	if (! compat(8)) {
 	       if (defined $multiarch) {
-			push @opts, "--libdir=\${prefix}/lib/$multiarch";
-			push @opts, "--libexecdir=\${prefix}/lib/$multiarch";
+			push @opts, "--libdir=$prefix/lib/$multiarch";
+			push @opts, "--libexecdir=$prefix/lib/$multiarch";
 		}
 		else {
-			push @opts, "--libexecdir=\${prefix}/lib";
+			push @opts, "--libexecdir=$prefix/lib";
 		}
 	}
 	else {
-		push @opts, "--libexecdir=\${prefix}/lib/" . sourcepackage();
+		push @opts, "--libexecdir=$prefix/lib/" . sourcepackage();
 	}
 
-	return $this->waf_doit('configure', @opts, @_);
+	return $this->waf_doit('configure', @opts, split (' ', $ENV{'DEB_CONFIGURE_FLAGS'}), @_);
 }
 
 sub build {

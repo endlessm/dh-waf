@@ -63,8 +63,6 @@ sub clean {
 	my $this=shift;
 	eval { $this->waf_doit('clean') }; warn $@ if $@;
 	doit('rm', '-rf', 'build/*', 'build/.conf*', 'build/.waf*', '.waf*');
-	# hack, proper git clean when on git…
-	doit('git', 'clean', '-dfx');
 	doit('find', '.', '-name', '*.pyc', '-exec', 'rm', '{}', '+');
 }
 

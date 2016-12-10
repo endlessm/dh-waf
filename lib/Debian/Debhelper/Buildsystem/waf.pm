@@ -11,7 +11,7 @@ package Debian::Debhelper::Buildsystem::waf;
 use strict;
 use Dpkg::Control;
 use Dpkg::Changelog::Debian;
-use Debian::Debhelper::Dh_Lib qw(error doit doit_noerror verbose_print compat dpkg_architecture_value);
+use Debian::Debhelper::Dh_Lib qw(error doit doit_noerror verbose_print compat dpkg_architecture_value set_buildflags);
 use base 'Debian::Debhelper::Buildsystem';
 
 sub DESCRIPTION {
@@ -43,6 +43,8 @@ sub configure {
 # Standard set of options for configure.
 	my @opts;
 	my $prefix=$ENV{'prefix'} || '/usr';
+
+	set_buildflags ();
 
 	push @opts, "--prefix=$prefix";
 	push @opts, "--includedir=$prefix/include";

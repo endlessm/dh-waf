@@ -1,5 +1,5 @@
 Source: dh-waf
-Section: waf
+Section: devel
 Priority: optional
 Maintainer: Niv Sardi <xaiki@debian.org>
 Build-Depends: debhelper (>= 9), libmodule-install-perl

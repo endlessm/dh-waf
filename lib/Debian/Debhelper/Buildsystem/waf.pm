@@ -45,8 +45,6 @@ sub configure {
 	my ($prefix) = $ENV{'DEB_CONFIGURE_FLAGS'} =~ m/--prefix=(\S+)/;
 	$prefix = '/usr' unless $prefix;
 
-	set_buildflags ();
-
 	push @opts, "--prefix=$prefix";
 	push @opts, "--includedir=$prefix/include";
 	push @opts, "--mandir=$prefix/share/man";

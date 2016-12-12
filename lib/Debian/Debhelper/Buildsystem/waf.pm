@@ -42,7 +42,8 @@ sub configure {
 
 # Standard set of options for configure.
 	my @opts;
-	my $prefix=$ENV{'prefix'} || '/usr';
+	my ($prefix) = $ENV{'DEB_CONFIGURE_FLAGS'} =~ m/--prefix=(\S+)/;
+	$prefix = '/usr' unless $prefix;
 
 	set_buildflags ();
 

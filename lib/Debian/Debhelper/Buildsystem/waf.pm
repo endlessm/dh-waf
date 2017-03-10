@@ -95,6 +95,8 @@ sub test {
 
 sub clean {
 	my $this=shift;
+	# XXX: this is needed as ./waf clean fails on unconfigured projects
+	eval { $this->waf_doit('configure') }; warn $@ if $@;
 	eval { $this->waf_doit('clean') }; warn $@ if $@;
 	doit('rm', '-rf', 'build/*', 'build/.conf*', 'build/.waf*', '.waf*');
 	doit('find', '.', '-name', '*.pyc', '-exec', 'rm', '{}', '+');
